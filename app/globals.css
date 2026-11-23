@@ -63,7 +63,7 @@ html {
   filter: contrast(1.14) saturate(1.12);
 }
 
-.corner-bracket-card {
+.corner-bracket-card:not(.absolute):not(.fixed) {
   position: relative;
 }
 
