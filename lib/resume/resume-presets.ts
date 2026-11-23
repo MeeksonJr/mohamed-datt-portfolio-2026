@@ -270,7 +270,7 @@ export function buildPersonaResume(
     location: 'Norfolk, Virginia, USA',
     github: 'https://github.com/MeeksonJr',
     linkedin: 'https://linkedin.com/in/mohamed-datt-b60907296',
-    website: 'https://mohameddatt.com',
+    website: 'https://meekson.me',
     summary: chosen.summary,
     skillsGroups: chosen.skillsGroups,
     experience: BASE_EXPERIENCE,

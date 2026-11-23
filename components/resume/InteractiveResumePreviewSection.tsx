@@ -347,7 +347,7 @@ export default function InteractiveResumePreviewSection() {
               </div>
               <p className="mt-1 text-sm font-bold text-[#C85A32]">{resume.roleTitle}</p>
               <p className="mt-1.5 font-mono text-xs text-[#4B5563]">
-                {resume.location} • {resume.email} • {resume.phone} • github.com/MeeksonJr
+                {resume.location} • {resume.email} • {resume.phone} • meekson.me • github.com/MeeksonJr
               </p>
             </header>
 

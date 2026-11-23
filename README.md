@@ -128,7 +128,7 @@ npm run dev
 | `DATABASE_URL` | PostgreSQL / Neon / Supabase connection string for Drizzle ORM | Local JSON fallback + curated snapshot defaults |
 | `ADMIN_SESSION_SECRET` | HMAC-SHA256 secret for `/admin` session cookies | Derived server signing secret |
 | `STRIPE_SECRET_KEY` | Dynamic itemized Stripe Checkout Sessions | Routes to verified `buy.stripe.com` hosted checkout links |
-| `NEXT_PUBLIC_SITE_URL` | Canonical production base URL (`robots.ts`, `sitemap.ts`, OG tags) | Defaults to `https://mohameddatt.com` |
+| `NEXT_PUBLIC_SITE_URL` | Canonical production base URL (`robots.ts`, `sitemap.ts`, OG tags) | Defaults to `https://meekson.me` |
 | `GITHUB_TOKEN` | Higher API rate limit for `@MeeksonJr` repo feed | Public GitHub REST API with cached fallback |
 
 ### Available Scripts

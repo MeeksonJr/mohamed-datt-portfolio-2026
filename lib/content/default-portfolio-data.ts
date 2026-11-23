@@ -20,7 +20,7 @@ export const PERSONAL_PROFILE = {
   phone: '+1 518-704-9000',
   github: 'https://github.com/MeeksonJr',
   linkedin: 'https://www.linkedin.com/in/mohamed-datt-b60907296',
-  website: 'https://mohameddatt.com',
+  website: 'https://meekson.me',
   resumeUrl: '/resume-Mohamed-Datt-Full-Stack-Developer.pdf',
   avatarImage: '/images/mohamed-datt-professional.png',
   portraitImage: '/images/Photo.jpg',

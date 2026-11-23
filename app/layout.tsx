@@ -25,7 +25,7 @@ const jetbrainsMono = JetBrains_Mono({
   variable: '--font-jetbrains',
 })
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://mohameddatt.com'
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://meekson.me'
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
