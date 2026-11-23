@@ -1,0 +1,131 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme inline {
+  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-space), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-serif), Georgia, serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, SFMono-Regular, monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+:focus-visible {
+  outline: 2px solid #e06d43;
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Subtle Architectural Telemetry Grid Overlay */
+.observatory-grid {
+  background-image:
+    linear-gradient(to right, rgba(224, 109, 67, 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(224, 109, 67, 0.045) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(224, 109, 67, 0.35);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(224, 109, 67, 0.7);
+}
+
+/* Dribbble Editorial Typography & Multi-Angle Studio Treatments */
+.portrait-noir {
+  filter: grayscale(100%) contrast(1.28) brightness(0.96);
+}
+
+.portrait-amber {
+  filter: sepia(35%) contrast(1.18) saturate(1.35) hue-rotate(-12deg);
+}
+
+.portrait-cyber {
+  filter: contrast(1.14) saturate(1.12);
+}
+
+.corner-bracket-card {
+  position: relative;
+}
+
+.corner-bracket-card::before,
+.corner-bracket-card::after {
+  content: '';
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  pointer-events: none;
+  border-color: #e06d43;
+}
+
+.corner-bracket-card::before {
+  top: -1px;
+  left: -1px;
+  border-top: 2px solid #e06d43;
+  border-left: 2px solid #e06d43;
+}
+
+.corner-bracket-card::after {
+  bottom: -1px;
+  right: -1px;
+  border-bottom: 2px solid #e06d43;
+  border-right: 2px solid #e06d43;
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 18s linear infinite;
+}
+
+@keyframes marquee-x {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee-x {
+  display: flex;
+  width: max-content;
+  animation: marquee-x 32s linear infinite;
+}
+
+.animate-marquee-x:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-spin-slow,
+  .animate-marquee-x {
+    animation: none;
+  }
+}

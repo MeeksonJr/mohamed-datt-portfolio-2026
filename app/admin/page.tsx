@@ -1,0 +1,20 @@
+import AdminDashboard from '@/components/admin/AdminDashboard'
+import { isAdminAuthenticated } from '@/lib/auth/admin-auth'
+import { loadPortfolioSnapshot } from '@/lib/db/cms-service'
+
+export const dynamic = 'force-dynamic'
+
+export default async function AdminPage() {
+  const [{ snapshot, persistence }, isAdmin] = await Promise.all([
+    loadPortfolioSnapshot(),
+    isAdminAuthenticated(),
+  ])
+
+  return (
+    <AdminDashboard
+      initialSnapshot={snapshot}
+      initialPersistence={persistence}
+      initialIsAdmin={isAdmin}
+    />
+  )
+}
