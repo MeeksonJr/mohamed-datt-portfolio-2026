@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  serverExternalPackages: ['@react-pdf/renderer'],
+  serverExternalPackages: ['@react-pdf/renderer', 'msedge-tts'],
   transpilePackages: ['three', '@react-three/fiber', '@react-three/drei'],
   images: {
     unoptimized: true,

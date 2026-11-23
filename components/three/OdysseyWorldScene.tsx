@@ -96,7 +96,7 @@ function SpriteBadge({
   return (
     <sprite
       position={position}
-      scale={selected || hovered ? [1.26, 0.29, 1] : [1.05, 0.24, 1]}
+      scale={selected || hovered ? [1.34, 0.31, 1] : [1.14, 0.26, 1]}
       onPointerOver={(e) => {
         e.stopPropagation()
         onHover?.(true)
@@ -161,7 +161,7 @@ function ActivePlanetMoons({
                 onSelectMoonNode(moon.id)
               }}
             >
-              <octahedronGeometry args={[isSelected ? 0.17 : 0.12, 0]} />
+              <octahedronGeometry args={[isSelected ? 0.2 : 0.145, 0]} />
               <meshStandardMaterial
                 color={moon.color}
                 emissive={moon.color}
@@ -719,7 +719,7 @@ function PlanetaryWarpCameraRig({
   hologramHidden: boolean
   onTelemetryTick?: (pos: [number, number, number]) => void
 }) {
-  const { camera } = useThree()
+  const { camera, size } = useThree()
   const lookTarget = useRef(new THREE.Vector3(0, 0, 0))
   const windowPointer = useRef({ x: 0, y: 0 })
   const tickAcc = useRef(0)
@@ -739,26 +739,32 @@ function PlanetaryWarpCameraRig({
     const [px, py, pz] = station.position
 
     if (!freeLook) {
-      // Split-screen composition: Even planets frame Left (+1.85 lookAt shift), Odd planets frame Right (-1.85)
-      const splitBias = hologramHidden ? 0 : activeSector % 2 === 0 ? 1.85 : -1.85
-      const mouseX = windowPointer.current.x * 0.38
-      const mouseY = windowPointer.current.y * 0.24
+      const aspect = size.width / Math.max(1, size.height)
+      const isMobileViewport = size.width < 1024 || aspect < 0.9
 
-      const targetCamX = px + splitBias + mouseX
-      const targetCamY = py + 0.75 + mouseY
-      const targetCamZ = pz + 6.4
+      // Desktop: Left/Right split framing; Mobile Portrait: Dead-center X + upper orbital stage Y
+      const splitBiasX = isMobileViewport || hologramHidden ? 0 : activeSector % 2 === 0 ? 1.85 : -1.85
+      const splitBiasY = isMobileViewport && !hologramHidden ? -1.18 : 0
+      const targetCamZ = pz + (isMobileViewport ? (hologramHidden ? 6.4 : 7.8) : 6.4)
+
+      const mouseX = windowPointer.current.x * (isMobileViewport ? 0.18 : 0.38)
+      const mouseY = windowPointer.current.y * (isMobileViewport ? 0.14 : 0.24)
+
+      const targetCamX = px + splitBiasX + mouseX
+      const targetCamY = py + (isMobileViewport ? 0.35 : 0.75) + splitBiasY + mouseY
 
       camera.position.x = THREE.MathUtils.damp(camera.position.x, targetCamX, 3.2, delta)
       camera.position.y = THREE.MathUtils.damp(camera.position.y, targetCamY, 3.2, delta)
       camera.position.z = THREE.MathUtils.damp(camera.position.z, targetCamZ, 3.2, delta)
 
-      lookTarget.current.x = THREE.MathUtils.damp(lookTarget.current.x, px + splitBias, 3.6, delta)
-      lookTarget.current.y = THREE.MathUtils.damp(lookTarget.current.y, py + 0.1, 3.6, delta)
+      lookTarget.current.x = THREE.MathUtils.damp(lookTarget.current.x, px + splitBiasX, 3.6, delta)
+      lookTarget.current.y = THREE.MathUtils.damp(lookTarget.current.y, py + splitBiasY + 0.08, 3.6, delta)
       lookTarget.current.z = THREE.MathUtils.damp(lookTarget.current.z, pz, 3.6, delta)
       camera.lookAt(lookTarget.current)
 
       if (camera instanceof THREE.PerspectiveCamera) {
-        const targetFov = isWarping ? 56 : 45
+        const baseFov = isMobileViewport ? 50 : 45
+        const targetFov = isWarping ? baseFov + 10 : baseFov
         if (Math.abs(camera.fov - targetFov) > 0.05) {
           camera.fov = THREE.MathUtils.damp(camera.fov, targetFov, 5, delta)
           camera.updateProjectionMatrix()
